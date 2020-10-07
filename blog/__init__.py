@@ -8,7 +8,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
  
-from blog import routes, models, services
+from blog import routes, models
 
 @app.shell_context_processor
 def make_shell_context():
