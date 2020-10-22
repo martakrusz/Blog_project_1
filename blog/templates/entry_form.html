@@ -5,7 +5,7 @@
    Dodaj nowy wpis
 </h3>
 
-<form action="" method="POST">
+<form action="/new-post/" method="POST">
   {{form.hidden_tag()}}
    <div class="form-group">
        <label for="title">Tytuł wpisu</label>
@@ -20,6 +20,14 @@
        <label class="form-check-label" for="is_published">Wpis opublikowany</label>
    </div>
    <button type="submit" class="btn btn-primary mt-5">Zapisz</button>
+   <button type="submit" class="btn btn-primary mt-5">Strona główna</button>
+   {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <h5>{{ message }}</h5>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </form>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from blog import app, db
 from blog.models import Entry
 from blog.forms import EntryForm
@@ -22,6 +22,20 @@ def create_entry():
                         is_published=form.is_published.data
                         )
                   db.session.add(entry)
+                  db.session.commit()
+                  flash('You were successfully add post')
+            else:
+                  errors = form.errors
+      return render_template("entry_form.html", form=form, errors=errors)
+
+@app.route("/edit-post/<int:entry_id>", methods=["GET","POST"])
+def edit_entry(entry_id):
+      entry = Entry.query.filter_by(id=entry_id).first_or_404()
+      form = EntryForm(obj=entry)
+      errors = None
+      if request.method == 'POST':
+            if form.validate_on_submit():
+                  form.publicate_obj(entry)
                   db.session.commit()
             else:
                   errors = form.errors
