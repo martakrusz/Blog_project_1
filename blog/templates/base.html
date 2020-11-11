@@ -28,6 +28,10 @@
      <span class="navbar-toggler-icon"></span>
    </button>
 
+   {% if session.logged_in%}
+     <a href= "{{url_for('list_drafts')}}" class="btn btn-secondary my-2 my-sm-0">Drafts</a>
+   {% endif %}
+
    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
      <ul class="navbar-nav mr-auto">
      </ul>
@@ -40,8 +44,8 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     {% if session.logged_in%}
-    <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit" action= "{{url_for('login')}}" method="POST">Wyloguj</button>
+    <form class="form-inline my-2 my-lg-0"  action= "{{url_for('logout')}}" method="POST">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Wyloguj</button>
     </form>
     {% else %}
       <a href= "{{url_for('login')}}" class="btn btn-secondary my-2 my-sm-0">Zaloguj</a>

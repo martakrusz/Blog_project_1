@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <h5>{{ message }}</h5>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Tytuł</th>
+        <th scope="col">Treść</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for post in all_posts %}
+      <tr>
+        <td>{{ post.pub_date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.body|truncate(100, true) }}</td>
+        <form method="POST" action="{{ url_for('remove_post', post_id=post.id) }}">
+            <td><input type="submit" value="Delete" name="btn" class="btn btn-primary" ></td>
+        </form>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+ 
+ {% endblock %}
