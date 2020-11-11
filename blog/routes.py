@@ -16,7 +16,7 @@ def login_required(view_func):
 def index():
    posts_list = services.load()
    if request.method == "POST":
-      if request.form["btn"] == "Add New Post":
+      if request.form["btn"] == "Nowy post":
          return redirect(url_for("create_entry"))
       
    return render_template("homepage.html", all_posts=posts_list)
